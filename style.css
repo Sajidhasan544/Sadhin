@@ -76,6 +76,7 @@ header {
 
 /* nav */
 /* nav */
+/* Main Styles */
 nav {
     width: 100vw;
     height: 80px;
@@ -85,11 +86,11 @@ nav {
     align-items: center;
     padding: 0 20px;
     position: relative;
+    z-index: 1001;
 }
 
 .menu {
     margin: 0;
-    width: 80vw;
     list-style: none;
     display: flex;
     justify-content: space-around;
@@ -117,17 +118,26 @@ nav {
 
 .menu a.active {
     background-color: #007BFF;
-    color: #fff;
+    color: white;
     border-radius: 5px;
 }
 
-/* Hide menu and add toggle button in smaller screens */
+.toggle-btn {
+    display: none;
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+/* Hide menu and display toggle button for smaller screens */
 @media (max-width: 768px) {
     .menu {
         flex-direction: column;
         position: fixed;
         top: 0;
-        left: -100%;
+        left: -250px; /* Hide off-screen */
         width: 250px;
         height: 100%;
         background-color: white;
@@ -135,23 +145,20 @@ nav {
         gap: 10px;
         padding-top: 20px;
         z-index: 1000;
+        transform: translateX(0);
+        transition: left 0.3s ease-in-out;
     }
 
     .menu.open {
-        transform: translateX(100%);
+        left: 0;
     }
 
     .menu.closed {
-        transform: translateX(0);
+        left: -250px; /* Slide out */
     }
 
     .toggle-btn {
         display: block;
-        background-color: transparent;
-        border: none;
-        font-size: 24px;
-        cursor: pointer;
-        z-index: 1001;
     }
 
     .menu a {
